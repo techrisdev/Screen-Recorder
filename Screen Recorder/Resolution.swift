@@ -11,7 +11,7 @@ struct Resolution {
 	
 	var string: String
 	
-	var captureSessionPreset: AVCaptureSession.Preset {
+	var captureSessionPreset: AVCaptureSession.Preset? {
 		switch string {
 		case Resolution.hd.string:
 			return .hd1280x720
@@ -20,7 +20,7 @@ struct Resolution {
 		case Resolution.ultraHD.string:
 			return .hd4K3840x2160
 		default:
-			fatalError("Unknown Resolution.")
+			return nil
 		}
 	}
 }

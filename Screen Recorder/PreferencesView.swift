@@ -6,7 +6,7 @@ import SwiftUI
 
 struct PreferencesView: View {
 	var body: some View {
-		PopUpButtonView()
+		ResolutionPopUpButtonView()
 			.padding()
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 	}

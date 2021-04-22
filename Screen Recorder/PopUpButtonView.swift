@@ -4,16 +4,19 @@
 
 import SwiftUI
 
-struct PopUpButtonView: NSViewRepresentable {
+struct ResolutionPopUpButtonView: NSViewRepresentable {
 	func makeNSView(context: Context) -> some NSView {
 		let nsPopUpButton = NSPopUpButton(title: "Resolution", target: context.coordinator, action: #selector(context.coordinator.action))
 		nsPopUpButton.addItems(withTitles: [Resolution.hd.string, Resolution.fullHD.string, Resolution.ultraHD.string])
+		if let string = UserDefaults.standard.string(forKey: "Resolution") {
+			nsPopUpButton.selectItem(withTitle: string)
+		}
 		
 		NotificationCenter.default.addObserver(forName: Notification.Name("PopUpButtonSelectedItemChanged"), object: nil, queue: nil) { _ in
 			guard let resolutionString = nsPopUpButton.selectedItem?.title else { return }
 			
 			// Store the new value in User Defaults.
-			UserDefaults.standard.setValue(Resolution(string: resolutionString), forKey: "Resolution")
+			UserDefaults.standard.setValue(resolutionString, forKey: "Resolution")
 		}
 		
 		return nsPopUpButton
