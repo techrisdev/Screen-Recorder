@@ -21,7 +21,7 @@ class Recorder: NSObject, AVCaptureFileOutputRecordingDelegate {
 		}
 		
 		// Configure the capture session.
-		session.sessionPreset = .hd1920x1080 // MARK: TODO: Make this option configurable by the user.
+		session.sessionPreset = (UserDefaults.standard.value(forKey: "Resolution") as? Resolution)?.captureSessionPreset ?? .hd1920x1080
 		
 		// Check if the session can add the new input.
 		if session.canAddInput(input) {
